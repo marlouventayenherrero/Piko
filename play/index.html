@@ -1,0 +1,1474 @@
+
+<!doctype html> 
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Phaser - Making your first game, part 2</title>
+    <script type="text/javascript" src="js/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+var w = 800, h = 600;
+var game = new Phaser.Game(w, h, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
+var button, button1,s,b9,b11,b12,b13,b14,b15;
+var player, keyboard,startagain;
+var plat,  life, gameOverText, bestScoreText, nafallkaText;
+var s1,s2,s3,s4,s5,s6,s7,s8,s9,s10;
+var s11,s12,s13,s14,s15,s16,s17,s18,s19,s20;
+var s21,s22,s23,s24,s25,s26,s27,s28,s29,s30;
+var s31,s32,s33,s34,s35,s36,s37,s38,s39,s40;
+var s41,s42,s43,s44,s45,s46,s47,s48,s49,s50;
+var s51,s52,s53,s54,s55,s56,s57,s58,s59,s60;
+var s61,s66,s63,s64,s65,s66,s66,s68,s69,s70, s71;
+
+
+
+
+var diamond, star, diamond,diamonds, platform, score = 0, scoreText, timeText, gameText;
+function preload() {
+	//game.load.image("a","img/firstaid.png");
+	    game.load.image("ha","img/slipps.png");
+
+   
+   	    game.load.spritesheet("naruto","img/slipps.png",75,50);
+        game.load.spritesheet("btn-jump","img/btn-up.png",100,100);
+        game.load.image('finish',"img/finish.png");
+        game.load.image('16',"img/16.png");
+		game.load.image('15',"img/15.png");
+        game.load.image('11',"img/11.png");
+        game.load.image('10',"img/10.png");
+        game.load.image('9',"img/9.png");
+        game.load.image('8',"img/8.png");
+        game.load.image('1',"img/1.png");
+		game.load.image('2',"img/2.png");
+		game.load.image('3',"img/3.png");
+		game.load.image('4',"img/4.png");
+		game.load.image('5',"img/5.png");
+		game.load.image('6',"img/6.png");
+		game.load.image('7',"img/7.png");
+		game.load.image('8',"img/8.png");
+		game.load.image('s', "img/s.png");
+	 	game.load.image("bg","img/scenes-lava.png");
+        //game.load.image("star","img/star.png");
+        //game.load.image("diamond","img/diamond.png");
+        game.load.image("platform","img/platform.png");
+        game.load.image("tapButton","img/btn.png");
+      //  game.load.spritesheet("dude","img/dude.png",32,48);
+      
+    game.load.image("stone","img/stone.png");
+   // game.load.image("aq","img/aq.png");
+    game.load.image("plat","img/plat.png");
+    game.load.image("bundle","img/bundle.png");
+    game.load.image("rocket","img/rocket.png");
+    game.load.image("five","img/five.png");
+    game.load.image("ten","img/ten.png");
+    game.load.image("one","img/one.png");
+    game.load.image("kras","img/kras.png");
+    game.load.image("knife","img/knife.png");
+    
+
+
+    game.load.image("button","img/button.png");
+    game.load.image("button1","img/button1.png");
+    game.load.image("button2","img/button2.png");
+game.load.image("button3","img/button3.png");
+    game.load.image("button4","img/button4.png");
+    game.load.image("button5","img/button5.png");
+
+    game.load.image("startagain","img/restartagain.png");
+ //startagain = game.add.button(74,140,"startagain",restart);
+
+    game.load.spritesheet("playbutton","img/PLAYPAUSE.png",100,100);
+    game.load.spritesheet("pausebutton","img/PAUSEPLAY.png",100,100);
+
+    // game.load.spritesheet("left","img/left.png",100,100)
+    // game.load.spritesheet("right","img/right.png",100,100)
+    game.load.image("lava","img/lava.png");
+    game.load.spritesheet("le","img/le.png",40,113);
+    //game.load.image("ha","img/slipps.png");
+}
+
+function create() {
+	// game.scale.fullScreenScaleMode = Phaser.ScaleManager.EXACT_FIT;
+   // game.input.onDown.add(goFull,game);
+	game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+    game.scale.forceLascape = true;
+    game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignVertically = true;
+
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+   //bg= game.add.tileSprite(0,0,game.stage.bounds.width, game.cache.getImage('bg').height,'bg');
+   // game.add.sprite(0,0,"bg");
+	//game.add.sprite(1,10,"a");
+	
+   
+     b8= game.add.sprite(90,100,'8');
+       b1= game.add.sprite(100,100,'1');
+	b2=game.add.sprite(210,100,'2');
+	b3=game.add.sprite(320,100,'3');
+	b4=game.add.sprite(320,305,'4');
+	b5=game.add.sprite(430,100,'5');
+	b6=game.add.sprite(540,100,'6');
+	b7=game.add.sprite(540,305,'7');//
+	b9=game.add.sprite(780,0,'9');
+
+	//b9=game.add.sprite(200,400,'9');
+	b11=game.add.sprite(0,90,'10');
+		b12=game.add.sprite(0,500,'10');
+			b13=game.add.sprite(320,300,'11');
+			b14=game.add.sprite(540,300,'11');
+			b15=game.add.sprite(90,100,'15');
+			b16=game.add.sprite(90,440,'15');
+			b17=game.add.sprite(200,100,'15');
+			b18=game.add.sprite(200,440,'15');
+			b19=game.add.sprite(310,100,'15');
+						b20=game.add.sprite(310,270,'15');
+			b21=game.add.sprite(310,440,'15');
+			b22=game.add.sprite(420,100,'15');
+						b23=game.add.sprite(420,270,'15');
+			b24=game.add.sprite(420,440,'15');
+			b25=game.add.sprite(530,100,'15');			
+						b26=game.add.sprite(530,270,'15');
+			b27=game.add.sprite(530,440,'15');
+			b28=game.add.sprite(640,100,'15');
+			b29=game.add.sprite(640,440,'15');
+			b30=game.add.sprite(0,300,'16');
+			finish=game.add.sprite(0,310,'finish');
+
+	
+
+	s=game.add.sprite(85,150,'s');
+	s1=game.add.sprite(85,170,'s');
+	s2=game.add.sprite(85,190,'s');
+	s3=game.add.sprite(85,210,'s');
+	s4=game.add.sprite(85,230,'s');
+	s5=game.add.sprite(85,250,'s');
+	s6=game.add.sprite(85,270,'s');
+	s7=game.add.sprite(85,310,'s');
+	s8=game.add.sprite(85,330,'s');
+	s9=game.add.sprite(85,350,'s');
+	s10=game.add.sprite(85,370,'s');
+	s11=game.add.sprite(85,390,'s');
+	s12=game.add.sprite(85,410,'s');
+
+
+	s13=game.add.sprite(195,150,'s');
+	s14=game.add.sprite(195,170,'s');
+	s15=game.add.sprite(195,190,'s');
+	s16=game.add.sprite(195,210,'s');
+	s17=game.add.sprite(195,230,'s');
+	s18=game.add.sprite(195,250,'s');
+	s19=game.add.sprite(195,270,'s');
+	s20=game.add.sprite(195,310,'s');
+	s21=game.add.sprite(195,330,'s');
+	s22=game.add.sprite(195,350,'s');
+	s23=game.add.sprite(195,370,'s');
+	s24=game.add.sprite(195,390,'s');
+	s25=game.add.sprite(195,410,'s');
+
+
+	s26=game.add.sprite(305,150,'s');
+	s27=game.add.sprite(305,170,'s');
+	s28=game.add.sprite(305,190,'s');
+	s29=game.add.sprite(305,210,'s');
+	s30=game.add.sprite(305,230,'s');
+	s31=game.add.sprite(305,250,'s');
+	s32=game.add.sprite(305,330,'s');
+	s33=game.add.sprite(305,350,'s');
+		s34=game.add.sprite(305,350,'s');
+
+	s35=game.add.sprite(305,370,'s');
+	s36=game.add.sprite(305,390,'s');
+	s37=game.add.sprite(305,410,'s');
+	
+	s38=game.add.sprite(415,150,'s');
+	s39=game.add.sprite(415,170,'s');
+	s40=game.add.sprite(415,190,'s');
+	s41=game.add.sprite(415,210,'s');
+	s42=game.add.sprite(415,230,'s');
+	s43=game.add.sprite(415,250,'s');
+	s44=game.add.sprite(415,330,'s');
+	s45=game.add.sprite(415,350,'s');
+	s46=game.add.sprite(415,370,'s');
+	s47=game.add.sprite(415,390,'s');
+	s48=game.add.sprite(415,410,'s');
+
+
+	s49=game.add.sprite(525,150,'s');
+	s50=game.add.sprite(525,170,'s');
+	s51=game.add.sprite(525,190,'s');
+	s52=game.add.sprite(525,210,'s');
+	s53=game.add.sprite(525,230,'s');
+	s54=game.add.sprite(525,250,'s');
+	s55=game.add.sprite(525,330,'s');
+	s56=game.add.sprite(525,350,'s');
+	s56=game.add.sprite(525,370,'s');
+	s57=game.add.sprite(525,390,'s');
+	s58=game.add.sprite(525,410,'s');
+
+	s59=game.add.sprite(635,150,'s');
+	s60=game.add.sprite(635,170,'s');
+	s61=game.add.sprite(635,190,'s');
+	s62=game.add.sprite(635,210,'s');
+	s63=game.add.sprite(635,230,'s');
+	s64=game.add.sprite(635,250,'s');
+	s65=game.add.sprite(635,270,'s');
+	s66=game.add.sprite(635,310,'s');
+	s67=game.add.sprite(635,330,'s');
+	s68=game.add.sprite(635,350,'s');
+	s69=game.add.sprite(635,370,'s');
+	s70=game.add.sprite(635,390,'s');
+	s71=game.add.sprite(635,410,'s');
+
+
+
+
+	 player = game.add.sprite(1,100,"naruto");
+    //player.scale.x = 2;
+    //player.scale.y = 2;
+    platform = game.add.sprite(0,550,"platform");
+
+    //player.animations.add('walk-right',[4,5,6,7],7,true);
+   // player.animations.add('walk-left',[8,9,10,11],7,true);
+
+    keyboard = game.input.keyboard.createCursorKeys();
+
+    /*createDiamonds(2000);
+
+    diamond = game.add.group();
+    diamond.enableBody = true;*/
+
+    game.physics.arcade.enable(platform);
+    
+
+    game.physics.arcade.enable(b9);
+    game.physics.arcade.enable(b11);
+    game.physics.arcade.enable(b12);
+        game.physics.arcade.enable(b13);
+    game.physics.arcade.enable(b14);
+    game.physics.arcade.enable(b15);
+    game.physics.arcade.enable(b16);
+    game.physics.arcade.enable(b17);
+    game.physics.arcade.enable(b18);
+    game.physics.arcade.enable(b19);
+    game.physics.arcade.enable(b20);
+    game.physics.arcade.enable(b21);
+    game.physics.arcade.enable(b22);
+    game.physics.arcade.enable(b23);
+    game.physics.arcade.enable(b24);
+    game.physics.arcade.enable(b25);
+    game.physics.arcade.enable(b26);
+	game.physics.arcade.enable(b27);
+    game.physics.arcade.enable(b28);
+    game.physics.arcade.enable(b29);
+    game.physics.arcade.enable(b30);
+        game.physics.arcade.enable(s);
+    game.physics.arcade.enable(s1);
+    game.physics.arcade.enable(s2);
+    game.physics.arcade.enable(s3);
+    game.physics.arcade.enable(s4);
+    game.physics.arcade.enable(s5);
+    game.physics.arcade.enable(s6);
+    game.physics.arcade.enable(s7);
+    game.physics.arcade.enable(s8);
+    game.physics.arcade.enable(s9);
+    game.physics.arcade.enable(s10);
+    game.physics.arcade.enable(s11);
+    game.physics.arcade.enable(s12);
+    game.physics.arcade.enable(s13);
+    game.physics.arcade.enable(s14);
+    game.physics.arcade.enable(s15);
+    game.physics.arcade.enable(s16);
+    game.physics.arcade.enable(s17);
+    game.physics.arcade.enable(s18);
+    game.physics.arcade.enable(s19);
+    game.physics.arcade.enable(s20);
+    game.physics.arcade.enable(s21);
+    game.physics.arcade.enable(s22);
+    game.physics.arcade.enable(s23);
+    game.physics.arcade.enable(s24);
+    game.physics.arcade.enable(s25);
+    game.physics.arcade.enable(s26);
+    game.physics.arcade.enable(s27);
+    game.physics.arcade.enable(s28);
+    game.physics.arcade.enable(s29);
+    game.physics.arcade.enable(s30);
+    game.physics.arcade.enable(s31);
+    game.physics.arcade.enable(s32);
+    game.physics.arcade.enable(s33);
+    game.physics.arcade.enable(s34);
+    game.physics.arcade.enable(s35);
+    game.physics.arcade.enable(s36);
+    game.physics.arcade.enable(s37);
+    game.physics.arcade.enable(s38);
+    game.physics.arcade.enable(s39);
+    game.physics.arcade.enable(s40);
+    game.physics.arcade.enable(s41);
+    game.physics.arcade.enable(s42)
+    game.physics.arcade.enable(s43);
+    game.physics.arcade.enable(s44);
+    game.physics.arcade.enable(s45);
+    game.physics.arcade.enable(s46);
+    game.physics.arcade.enable(s47);
+    game.physics.arcade.enable(s48);
+    game.physics.arcade.enable(s49);
+    game.physics.arcade.enable(s50);
+    game.physics.arcade.enable(s51);
+    game.physics.arcade.enable(s52);
+    game.physics.arcade.enable(s53);
+    game.physics.arcade.enable(s54);
+    game.physics.arcade.enable(s55);
+    game.physics.arcade.enable(s56);
+    game.physics.arcade.enable(s57);
+    game.physics.arcade.enable(s58);
+    game.physics.arcade.enable(s59);
+    game.physics.arcade.enable(s60);
+    game.physics.arcade.enable(s61);
+    game.physics.arcade.enable(s62);
+    game.physics.arcade.enable(s63);
+    game.physics.arcade.enable(s64);
+    game.physics.arcade.enable(s65);
+    game.physics.arcade.enable(s66);
+    game.physics.arcade.enable(s67); 
+    game.physics.arcade.enable(s68);
+    game.physics.arcade.enable(s69);
+    game.physics.arcade.enable(70);
+    game.physics.arcade.enable(s71);
+
+    game.physics.arcade.enable(finish);
+
+
+    platform.body.immovable = true;
+    platform.scale.x = 2;
+
+    game.physics.arcade.enable(player);
+    player.body.collideWorldBounds = true;
+    player.body.gravity.y = 100;
+    //player.body.bounce.y = 0.2
+
+    button = game.add.button(224,500,"button",walkright);
+    button.scale.x = .9;
+    button.scale.y= .9;
+
+    button1 = game.add.button(324,500,"button1",walkleft);
+    button.scale.x = .9;
+    button.scale.y= .9;
+ //   startagain = game.add.button(424,500,"startagain",restart);
+  //  button.scale.x = .9;
+    //button.scale.y= .9;
+player.animations.add('walk-right',[0],7,true);
+    player.animations.add('walk-left',[1],7,true);
+
+
+//scoreText = game.add.text(w-200,50,"SCORE: 0",{fill:"aqua"});
+  //  gameText = game.add.text(w/2-100,h/2,"",{fill:"aqua"});
+    //timeText = game.add.text(50,50,"TIME: ",{fill:"auqa"});
+ life = game.add.text(600,30,'Score: 0',{fill:"aqua"});
+    bestScoreText = game.add.text(600,70,'Best: '+getScore(),{fill:"gold"});
+    gameOverText = game.add.text((w/2)-100,h/2,'',{font: '26px Impact',fill:"black"});
+     life.fixedToCamera = true;
+    bestScoreText.fixedToCamera = true;
+    gameOverText.fixedToCamera = true;
+}
+
+// var x = 0;
+function update() {
+	game.scale.pageAlignVertically = true;
+    game.scale.pageAlignHorizontally = true;
+    game.scale.setShowAll();
+    game.scale.refresh();
+
+   // bg.tilePosition.x-=1;
+   //game.physics.arcade.overlap(player,s,kills);
+      game.physics.arcade.overlap(player,b9,killbyb9);
+       game.physics.arcade.overlap(player,b11,killbyb11);
+   game.physics.arcade.overlap(player,b12,killbyb12);
+       game.physics.arcade.overlap(player,b13,killbyb13);
+       game.physics.arcade.overlap(player,b14,killbyb14);
+       game.physics.arcade.overlap(player,b15,killbyb15);
+       game.physics.arcade.overlap(player,b16,killbyb16);
+       game.physics.arcade.overlap(player,b17,killbyb17);
+       game.physics.arcade.overlap(player,b18,killbyb18);
+       game.physics.arcade.overlap(player,b19,killbyb19);
+       game.physics.arcade.overlap(player,b20,killbyb20);
+       game.physics.arcade.overlap(player,b21,killbyb21);
+       game.physics.arcade.overlap(player,b22,killbyb22);
+       game.physics.arcade.overlap(player,b23,killbyb23);
+       game.physics.arcade.overlap(player,b24,killbyb24);
+       game.physics.arcade.overlap(player,b25,killbyb25);
+       game.physics.arcade.overlap(player,b26,killbyb26);
+       game.physics.arcade.overlap(player,b27,killbyb27);
+       game.physics.arcade.overlap(player,b28,killbyb28);
+       game.physics.arcade.overlap(player,b29,killbyb29);
+       game.physics.arcade.overlap(player,b30,killbyb30);
+              game.physics.arcade.overlap(player,s,kills);
+       game.physics.arcade.overlap(player,s1,kills1);
+       game.physics.arcade.overlap(player,s2,kills2);
+       game.physics.arcade.overlap(player,s3,kills3);
+       game.physics.arcade.overlap(player,s4,kills4);
+       game.physics.arcade.overlap(player,s5,kills5);
+       game.physics.arcade.overlap(player,s6,kills6);
+       game.physics.arcade.overlap(player,s7,kills7);
+       game.physics.arcade.overlap(player,s8,kills8);
+       game.physics.arcade.overlap(player,s9,kills9);
+       game.physics.arcade.overlap(player,s10,kills10);
+       game.physics.arcade.overlap(player,s11,kills11);
+       game.physics.arcade.overlap(player,s12,kills12);
+       game.physics.arcade.overlap(player,s13,kills13);
+       game.physics.arcade.overlap(player,s14,kills14);
+       game.physics.arcade.overlap(player,s15,kills15);
+       game.physics.arcade.overlap(player,s16,kills16);
+       game.physics.arcade.overlap(player,s17,kills17);
+       game.physics.arcade.overlap(player,s18,kills18);
+       game.physics.arcade.overlap(player,s19,kills19);
+       game.physics.arcade.overlap(player,s20,kills20);
+       game.physics.arcade.overlap(player,s21,kills21);
+       game.physics.arcade.overlap(player,s22,kills22);
+       game.physics.arcade.overlap(player,s23,kills23);
+       game.physics.arcade.overlap(player,s24,kills24);
+       game.physics.arcade.overlap(player,s24,kills25);
+       game.physics.arcade.overlap(player,s26,kills26);
+       game.physics.arcade.overlap(player,s27,kills27);
+       game.physics.arcade.overlap(player,s28,kills28);
+       game.physics.arcade.overlap(player,s29,kills29);
+       game.physics.arcade.overlap(player,s30,kills30);
+	   game.physics.arcade.overlap(player,s31,kills31);
+       game.physics.arcade.overlap(player,s32,kills32);
+       game.physics.arcade.overlap(player,s33,kills33);
+       game.physics.arcade.overlap(player,s34,kills34);
+       game.physics.arcade.overlap(player,s35,kills35);
+       game.physics.arcade.overlap(player,s36,kills36);
+       game.physics.arcade.overlap(player,s37,kills37);
+       game.physics.arcade.overlap(player,s38,kills38);
+       game.physics.arcade.overlap(player,s39,kills39);
+       game.physics.arcade.overlap(player,s40,kills40); 
+       game.physics.arcade.overlap(player,s41,kills41);
+       game.physics.arcade.overlap(player,s42,kills42);
+       game.physics.arcade.overlap(player,s43,kills43);
+       game.physics.arcade.overlap(player,s44,kills44);
+       game.physics.arcade.overlap(player,s44,kills45);
+       game.physics.arcade.overlap(player,s46,kills46);
+       game.physics.arcade.overlap(player,s47,kills47);
+       game.physics.arcade.overlap(player,s48,kills48);
+       game.physics.arcade.overlap(player,s49,kills49);
+       game.physics.arcade.overlap(player,s50,kills50);      
+       game.physics.arcade.overlap(player,s51,kills51);
+       game.physics.arcade.overlap(player,s52,kills52);
+       game.physics.arcade.overlap(player,s53,kills53);
+       game.physics.arcade.overlap(player,s54,kills54);
+       game.physics.arcade.overlap(player,s54,kills55);
+       game.physics.arcade.overlap(player,s56,kills56);
+       game.physics.arcade.overlap(player,s57,kills57);
+       game.physics.arcade.overlap(player,s58,kills58);
+       game.physics.arcade.overlap(player,s59,kills59);
+       game.physics.arcade.overlap(player,s60,kills60);
+	   game.physics.arcade.overlap(player,s61,kills61);
+       game.physics.arcade.overlap(player,s62,kills62);
+       game.physics.arcade.overlap(player,s63,kills63);
+       game.physics.arcade.overlap(player,s64,kills64);
+       game.physics.arcade.overlap(player,s64,kills65);
+       game.physics.arcade.overlap(player,s66,kills66);
+       game.physics.arcade.overlap(player,s67,kills67);
+       game.physics.arcade.overlap(player,s68,kills68);
+       game.physics.arcade.overlap(player,s69,kills69);
+       game.physics.arcade.overlap(player,s70,kills70);  
+       game.physics.arcade.overlap(player,s71,kills71);
+       game.physics.arcade.overlap(player,finish,playerfinish);
+
+    game.physics.arcade.collide(player,platform);
+      
+
+
+    //game.physics.arcade.overlap(player,diamond,killdude);
+
+   /* if(keyboard.left.isDown){
+        // x++;
+        player.animations.play("walk-left");
+        player.body.velocity.x = -100;
+        // bg.frame = 0;
+    }
+    else if(keyboard.right.isDown){
+        // x--;
+        // bg.frame = 1;
+        player.animations.play("walk-right");
+        player.body.velocity.x = 100;
+    }
+    else if(keyboard.up.isDown){
+        player.body.velocity.y = -100;
+        //player.animations.stop();
+    }
+
+    else{
+                player.body.velocity.x = 0;
+        player.animations.stop();
+        //(keyboard.up.isDown && player.body.touching.down){
+        //player.body.velocity.x = -400;
+    }*/
+}
+
+
+/*function createDiamonds(time){
+    setInterval(function(){
+        diamonds = diamond.create(Math.random()*w,-100,"diamond");
+        diamonds.body.gravity.y = 1000;
+        var scale = Math.random();
+        diamonds.scale.y = scale*1;
+        diamonds.scale.x = scale*1;
+
+        // diamonds.body.bounce.y = 0.2;
+        diamonds.body.collideWorldBounds = true;
+    },time);
+}
+*/
+var a=0;
+function kills(player,s){
+	a=0+5;
+	s.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills1(player,s1){
+	a=a+5;
+	s1.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills2(player,s2){
+	a=a+5;
+	s2.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills3(player,s3){
+	a=a+5;
+	s3.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills4(player,s4){
+	a=a+5;
+	s4.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills5(player,s5){
+	a=a+5;
+	s5.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills6(player,s6){
+	a=a+5;
+	s6.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills7(player,s7){
+	a=a+5;
+	s7.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills8(player,s8){
+	a=a+5;
+	s8.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills9(player,s9){
+	a=a+5;
+	s9.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills10(player,s10){
+	a=a+5;
+	s10.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills11(player,s11){
+	a=a+5;
+	s11.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills12(player,s12){
+	a=a+5;
+	s12.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills13(player,s13){
+	a=a+5;
+	s13.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills14(player,s14){
+	a=a+5;
+	s14.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills15(player,s15){
+	a=a+5;
+	s15.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills16(player,s16){
+	a=a+5;
+	s16.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills17(player,s17){
+	a=a+5;
+	s17.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills18(player,s18){
+	a=a+5;
+	s18.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills19(player,s19){
+	a=a+5;
+	s19.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills20(player,s20){
+	a=a+5;
+	s20.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills21(player,s21){
+	a=a+5;
+	s21.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills22(player,s22){
+	a=a+5;
+	s22.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills23(player,s23){
+	a=a+5;
+	s23.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills24(player,s24){
+	a=a+5;
+	s24.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills25(player,s25){
+	a=a+5;
+	s25.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills26(player,s26){
+	a=a+5;
+	s26.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills27(player,s27){
+	a=a+5;
+	s27.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills28(player,s28){
+	a=a+5;
+	s28.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills29(player,s29){
+	a=a+5;
+	s29.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills30(player,s30){
+	a=a+5;
+	s30.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills31(player,s31){
+	a=a+5;
+	s31.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills32(player,s32){
+	a=a+5;
+	s33.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills33(player,s33){
+	a=a+5;
+	s33.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills34(player,s34){
+	a=a+5;
+	s34.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills35(player,s35){
+	a=a+5;
+	s35.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills36(player,s36){
+	a=a+5;
+	s36.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills37(player,s37){
+	a=a+5;
+	s37.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills38(player,s38){
+	a=a+5;
+	s38.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills39(player,s39){
+	a=a+5;
+	s39.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills40(player,s40){
+	a=a+5;
+	s40.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills41(player,s41){
+	a=a+5;
+	s41.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills42(player,s42){
+	a=a+5;
+	s42.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills43(player,s43){
+	a=a+5;
+	s43.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills44(player,s44){
+	a=a+5;
+	s44.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills45(player,s45){
+	a=a+5;
+	s45.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills46(player,s46){
+	a=a+5;
+	s46.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills47(player,s47){
+	a=a+5;
+	s47.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills48(player,s48){
+	a=a+5;
+	s48.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills49(player,s49){
+	a=a+5;
+	s49.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills50(player,s50){
+	a=a+5;
+	s50.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills51(player,s51){
+	a=a+5;
+	s51.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills52(player,s52){
+	a=a+5;
+	s52.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills53(player,s53){
+	a=a+5;
+	s53.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills54(player,s54){
+	a=a+5;
+	s54.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills55(player,s55){
+	a=a+5;
+	s55.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills56(player,s56){
+	a=a+5;
+	s56.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills57(player,s57){
+	a=a+5;
+	s57.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills58(player,s58){
+	a=a+5;
+	s58.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills59(player,s59){
+	a=a+5;
+	s59.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills60(player,s60){
+	a=a+5;
+	s60.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills61(player,s61){
+	a=a+5;
+	s61.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills62(player,s62){
+	a=a+5;
+	s62.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills63(player,s63){
+	a=a+5;
+	s63.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills64(player,s64){
+	a=a+5;
+	s64.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills65(player,s65){
+	a=a+5;
+	s65.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills66(player,s66){
+	a=a+5;
+	s66.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills67(player,s67){
+	a=a+5;
+	s67.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills68(player,s68){
+	a=a+5;
+	s68.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills69(player,s69){
+	a=a+5;
+	s69.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}var a=0;
+function kills70(player,s70){
+	a=a+5;
+	s70.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+var a=0;
+function kills71(player,s71){
+	a=a+5;
+	s71.kill();
+    if(getScore()<=a){
+        saveScore(a);
+        bestScoreText.text = "Best: "+a;
+    }
+
+    life.text = "Score: "+a;
+}
+function playerfinish(player,finish){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+
+}
+
+	
+function killbyb9(player,b9){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+    	game.input.onTap.addOnce(restart,this);
+
+
+}
+function killbyb11(player,b11){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+    	game.input.onTap.addOnce(restart,this);
+
+
+}
+function killbyb12(player,b12){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+    	game.input.onTap.addOnce(restart,this);
+
+
+}
+function killbyb13(player,b13){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}
+function killbyb14(player,b14){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+    	game.input.onTap.addOnce(restart,this);
+
+
+}
+function killbyb15(player,b15){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;	
+    game.input.onTap.addOnce(restart,this);
+
+
+}function killbyb16(player,b16){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+    	game.input.onTap.addOnce(restart,this);
+
+
+}function killbyb17(player,b17){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+    	game.input.onTap.addOnce(restart,this);
+
+
+}function killbyb18(player,b18){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+    	game.input.onTap.addOnce(restart,this);
+
+
+}function killbyb19(player,b19){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb20(player,b20){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb21(player,b21){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb22(player,b22){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb23(player,b23){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb24(player,b24){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb25(player,b25){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb26(player,b26){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb27(player,b27){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}function killbyb28(player,b28){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}
+function killbyb29(player,b29){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}
+function killbyb30(player,b30){
+    player.kill();
+    gameOverText.text = "GAME OVER!! \n Double Tap To ReStart This";
+    game._paused = true;
+	game.input.onTap.addOnce(restart,this);
+
+}
+
+function killplatform(player, platform){
+    dude.kill();
+}
+
+
+
+function walkright(){
+button.frame =1;
+//if(player.body.touching.down)
+{
+player.animations.play("walk-right");
+player.body.velocity.x = 50;
+player.body.velocity.y=-100;
+}
+setTimeout(function(){
+button.frame=0;
+},50)
+}
+function walkleft(){
+button.frame =1;
+//if(player.body.touching.down)
+{
+player.animations.play("walk-left");
+player.body.velocity.x = -50;
+player.body.velocity.y=-100;
+}
+setTimeout(function(){
+button.frame=0;
+},50)
+}
+
+//function restart () {
+//startagain.frame=0;
+//window.location.href = window.location.href;
+
+//}
+//function restart () {
+//startagain.frame=0;
+//window.location.href = window.location.href;
+//}
+
+function saveScore(Score){
+    localStorage.setItem("gameScore",Score);
+}
+
+function getScore(){
+    return (localStorage.getItem("gameScore") == null || localStorage.getItem("gameScore") == "")?0:localStorage.getItem("gameScore");
+}
+function restart(){
+	window.location.href=window.location.href;
+	stateText.visible = false;
+}
+
+//function goFull(){
+//    game.scale.startFullScreen(false)
+//}
+
+</script>
+
+</body>
+</html>

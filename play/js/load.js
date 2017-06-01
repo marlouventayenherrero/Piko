@@ -1,0 +1,26 @@
+console.log("load");
+loadGame={
+	preload:function(){
+	game.load.audio('sound',"audio/ppap.mp3")
+    game.load.image('anim','img/bg.png');
+    game.load.image('bg','img/base1.png');
+    game.load.image('star','img/star.png');
+    game.load.spritesheet('naruto','img/charniel.png',64,64);
+    game.load.spritesheet('enemy','img/charkc.png',64,50);
+    game.load.spritesheet('enemy1','img/charclarie.png',63,55);
+    game.load.spritesheet('enemy2','img/charespe.png',63,60);
+    game.load.image('btup','img/up.png');
+    game.load.image('btdown','img/down.png');
+    game.load.image('btleft','img/left.png');
+    game.load.image('btright','img/right.png');
+    game.load.image('finish','img/a.png');
+    game.load.image('restart','img/restart.png');
+    game.load.image('pause','img/pause.png');
+    game.load.image('play','img/play.png'); 
+    //game.load.image('bg',"img/bg.png");
+   
+},
+create:function(){
+	game.state.start("menuGame");
+}
+}
